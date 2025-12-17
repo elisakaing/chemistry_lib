@@ -1,3 +1,5 @@
+# Elisa KAING 21128809
+
 ATOMS = [
     (("O", 8, 16), ("1s2", "2s2", "2p4")),
     (("C", 6, 12), ("1s2", "2s2", "2p2")),
@@ -172,7 +174,7 @@ SORTED_ORB = [
     (7, 1),
 ]
 
-str_atoms_list = [
+STR_ATOMS_LIST = [
     "C",
     "H",
     "O",
@@ -192,6 +194,15 @@ str_atoms_list = [
 
 
 class Atom:
+    """
+    Classe qui représente un Atome (ex : l'atome carbone C)
+
+    Attributs:
+        name (str) : nom de l'atome (ex : "C")
+        num_electron (int) : nombre d'électrons de l'atome (ex : 6)
+        weight (float) : masse de l'atome (ex : 12.)
+    """
+
     def __init__(self, name: str, num_electron: int, weight: float):
         self.name = name
         self.num_electron = num_electron
@@ -215,7 +226,6 @@ class Atom:
         return f"({self.name}, {self.num_electron}, {self.weight})"
 
     def __eq__(self, other_atom):
-        print(other_atom)
         return (self.name, self.num_electron, self.weight) == (
             other_atom.name,
             other_atom.num_electron,
@@ -225,10 +235,56 @@ class Atom:
     def __hash__(self):
         return hash((self.name, self.num_electron, self.weight))
 
-    def from_str(str_atom):
-        """Convert str to Atom object"""
-        index = str_atoms_list.index(str_atom)
+    @staticmethod
+    def from_str(str_atom: str):
+        """
+        Convertit un str en un objet Atom (ex : "C" devient l'Atom C)
+
+        Args:
+            str_atoms: str qui représente un Atom
+        """
+        index = STR_ATOMS_LIST.index(str_atom)
         return atoms_list[index]
+
+    @staticmethod
+    def num_elec(l: int):
+        """
+        Renvoie le nb d'électrons dans la couche associée s, p, d ou f
+        Pour l=0 (couche s), il y a 2 électrons
+        Pour l=1 (couche p), il y a 6 électrons
+        Pour l=2 (couche d), il y a 10 éléctrons
+        Pour l=3 (couche f), il y a 14 électrons
+
+        Args :
+            l: lettre orbitale, indique le nb d'électrons dans la couche
+        """
+        return (l * 2 + 1) * 2
+
+    @staticmethod
+    def get_orbitales(z: int):
+        """
+        Renvoie la configuration électronique d'un atome à z électrons
+        Args :
+            z: le nb d’électrons de notre atome
+        """
+        sorted_orbitales = SORTED_ORB
+        # On commence avec z électrons à disposer , que l’on va soustraire au fil des orbitales
+        atoms_free = z
+        orbitales_atom = []
+        i = 0
+        while atoms_free > 0:
+            # On sélectionne la bonne orbitale
+            good_orbitale = sorted_orbitales[i]
+            n, l = good_orbitale
+            atoms_orb = Atom.num_elec(l)
+            # Nb d'électrons dans la couche actuelle
+            num_elec_actuel = min(atoms_orb, atoms_free)
+
+            atoms_free -= atoms_orb
+
+            orbitales_atom.append((n, l, num_elec_actuel))
+            i += 1
+        return orbitales_atom
 
 
 C = Atom(name="C", num_electron=6, weight=12)
@@ -247,34 +303,4 @@ F = Atom("F", 9, 19.0)  # fluorine
 Co = Atom("Co", 27, 58.9)  # cobalt
 Mo = Atom("Mo", 42, 95.9)  # molybdenum
 
-
 atoms_list = [C, H, O, N, Ca, P, K, S, Na, Cl, Fe, I, F, Co, Mo]
-
-
-def num_elec(l):
-    """l est à valeurs dans 0,1,2 et 3
-    Renvoie le nombre d'atomes sur une orbitale"""
-    return (l * 2 + 1) * 2
-
-
-def get_orbitales(z: int):
-    # Z est le nombre d’électrons de notre atome
-    sorted_orbitales = SORTED_ORB
-    # On commence avec Z électrons à disposer , que l’on va soustraire au fil des orbitales
-    atoms_free = z
-    orbitales_atom = []
-    i = 0
-    while atoms_free > 0:
-        # On sélectionne la bonne orbitale
-        good_orbitale = sorted_orbitales[i]
-        n, l = good_orbitale
-        # Determiner le nombre d’atomes sur cette orbitale
-        atoms_orb = num_elec(l)
-        # Nombre d'atomes dans la couche actuelle
-        num_atom = min(atoms_orb, atoms_free)
-
-        atoms_free -= atoms_orb
-
-        orbitales_atom.append((n, l, num_atom))
-        i += 1
-    return orbitales_atom

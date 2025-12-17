@@ -1,11 +1,19 @@
+# Elisa KAING 21128809
+
 import re
 from .atom import Atom
 
 
-digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
-
 class Molecule:
+    """
+    Classe qui représente une molécule (ex: la molécule H20)
+
+    Attributs:
+        formula (str): la formule de l'atome (ex: "H2O")
+        atoms (dict[Atom, int]): dictionnaire des atomes dans la molecule (ex: {H:2, O:1})
+        weight (float): masse de la molécule, c'est la somme des atomes la composant
+    """
+
     def __init__(self, formula: str):
 
         self.formula = formula
