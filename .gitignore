@@ -1,1 +1,3 @@
 __pycache__
+.pytest_cache
+chemistry_lib.egg*
