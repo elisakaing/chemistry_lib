@@ -1,46 +1,55 @@
-# Un package pour de la chimie
+# Chemistry Lib 🧪
 
-Ce repo montre une structure pour l'organisation du projet pour la deuxieme partie
-de l'evaluation du cours de Python.  
+Une bibliothèque Python légère pour modéliser des atomes, des molécules et des réactions chimiques.
 
-Le dossier est organise de la maniere suivante :
+## 📋 Description
+
+**Chemistry Lib** est un package Python conçu pour simplifier la manipulation de données chimiques. Il permet de créer des représentations atomiques, de construire des molécules et de gérer des utilitaires de réaction de base.
+
+Ce projet a été conçu pour mettre en pratique les standards de packaging Python modernes, la programmation orientée objet et les tests unitaires avec `pytest`.
+
+## 🚀 Fonctionnalités
+
+* **Gestion des atomes :** Création d'atomes avec leurs propriétés (symbole, numéro atomique, masse).
+* **Construction de molécules :** Assemblage d'atomes pour former des molécules.
+* **Utilitaires de réaction :** Outils pour gérer la logique chimique.
+* **Fiabilité :** Code couvert à 100% par des tests unitaires via `pytest`.
+
+## 🛠 Installation
+
+Cloner le dépôt:
+```bash
+git clone https://github.com/elisakaing/chemistry_lib.git
+cd chemistry_lib
 ```
-.
-├── README.md
-├── chempkg
-├── pyproject.toml
-└── tests
-    ├── test_atom.py
-    ├── test_molecule.py
-    └── test_reactions_utils.py
+
+Initialisation du projet:
+```bash
+pip install -e .
 ```
 
-## Projet
+## ✅ Lancer les tests
+```bash
+# Assurez-vous d'abord d'avoir installé pytest
+pip install pytest
+```
+```bash
+# Lancer tous les tests
+pytest tests
+```
 
-Les differents modules de notre package `chempkg` ont vocation a etre mis dans
-le dossier `chempkg`.  
+## 📂 Structure du projet
+```
+chemistry_lib/
+├── chempkg/           # Code source du package
+│   ├── __init__.py
+│   ├── atom.py
+│   ├── mol.py
+│   └── reaction_utils.py
+├── tests/             # Tests unitaires
+├── pyproject.toml     # Configuration du projet & système de build
+└── README.md          # Documentation
+```
 
-Le dossier `tests` contient les fichiers pour verifier que les objets et fonctions
-codes ont bien le comportement prevu.  
-Pour lancer les tests installer pytest avec pip puis executer `pytest tests`.
-
-## Cloner projet
-
-Pour faire votre propre projet sur Github, la premiere etape est d'avoir un compte Github. Pour cela suivez les
-[instructions](https://docs.github.com/fr/get-started/start-your-journey/creating-an-account-on-github)
-d'installation.
-
-Ensuite, il faut que vous cloniez (ie copiez), ce repo.
-Pour cela installer `git` sur votre ordinateur puis executez la commande suivante :
-`git clone https://github.com/etienneguevel/exemple_projet.git`.  
-
-Le dossier clone pointe toujours vers l'adresse de mon dossier en ligne. Pour
-changez ca, il va falloir changer le `remote origin` du dossier.  
-Protocole :
-- [Creez un repo github](https://docs.github.com/fr/repositories/creating-and-managing-repositories/creating-a-new-repository) sur votre compte Github, et notez l'url
-- Dans votre terminal, allez dans le dossier clone, `cd exemple_projet`
-- Enlevez le pointage vers mon depot avec la commande `git remote rm origin`
-- Pointez vers le dossier que vous venez de creer `git remote add origin <url_votre_repo>`
-
-Pour votre premier commit vous devrez push de cette maniere :  
-`git push --set-upstream origin main`
+## 👤 Autrice
+Elisa Kaing
